@@ -9,9 +9,7 @@ const app = express();
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-
 const uri = `mongodb+srv://${process.env.USUARIO}:${process.env.PASSWORD}@cluster0.d7vx9.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
-console.log(uri);
 mongoose.connect(uri,
     { useNewUrlParser: true, useUnifiedTopology: true }
 )
