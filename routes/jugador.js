@@ -1,11 +1,15 @@
 const router = require('express').Router();
 
-router.get('/', async (req, res) => {  //consulta todos los jugadores (get)
+const Jugador = require('../models/Jugador')
 
-    res.json({
-        error: null,
-        data: 'aquí va ir la data'
-    })
+router.get('/', async (req, res) => {
+    try {
+        const arrayJugador = await Jugador.find();
+        console.log(arrayJugador)
+        res.json(arrayJugador)
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 module.exports = router;

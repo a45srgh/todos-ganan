@@ -27,7 +27,6 @@ const schemaLogin = Joi.object({
 })
 
 router.post('/register', async (req, res) => {
-
     const { error } = schemaRegister.validate(req.body)
     
     if (error) {
@@ -45,8 +44,6 @@ router.post('/register', async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
-    console.log("****"+req.body.password);
-    console.log("******"+password);
 
     const jugador = new Jugador({
 
