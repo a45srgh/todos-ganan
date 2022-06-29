@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Jugador = require('../models/Jugador');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const schemaRegister = Joi.object({
 
@@ -52,7 +53,7 @@ router.post('/register', async (req, res) => {
         materno: req.body.materno,
         telefono: req.body.telefono,
         email: req.body.email,
-        password: req.body.password,
+        password: password,
         date: req.body.date,
         calle: req.body.calle,
         exterior: req.body.exterior,
@@ -70,8 +71,30 @@ router.post('/register', async (req, res) => {
             data: saveJugador
         })
     } catch (error) {
-        res.status(400).json({error})
-    }       
+        res.status(400).json({error});
+    } 
+})
+
+router.post('/login', async (req, res) => {
+
+    const { error } = schemaLogin.validate(req.body);
+    if (error) return res.status(400).json({ error: error.details[0].message });
+    
+    const jugador = await Jugador.findOne({ email: req.body.email });
+    if (!jugador) return res.status(400).json({ error: 'Jugador no encontrado' });
+
+    const validPassword = await bcrypt.compare(req.body.password, jugador.password);
+    if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' });
+    
+    const token = jwt.sign({
+        nombre: jugador.nombre,
+        id: jugador._id
+    }, process.env.TOKEN_SECRET);
+    
+    res.header('auth-token', token).json({
+        error: null,
+        data: {token}
+    });
 })
 
 module.exports = router;

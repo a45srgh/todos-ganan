@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -19,7 +21,7 @@ mongoose.connect(uri,
 const authRoutes = require('./routes/auth');
 const jugadorRoutes = require('./routes/jugador');
 
-app.use('/api/user', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/jugador', jugadorRoutes);
 
 app.get('/', (req, res) => {
