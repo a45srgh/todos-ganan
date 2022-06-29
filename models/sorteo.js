@@ -22,14 +22,14 @@ const sorteoRoutes = mongoose.Schema({
     fechaInicio: {
         type: String,
         required: true,
-        min: 12,
-        max: 12
+        min: 10,
+        max: 10
     },
     fechaFinal: {
         type: String,
         required: true,
-        min: 6,
-        max: 100
+        min: 10,
+        max: 10
     }
         
 })

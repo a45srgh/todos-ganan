@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const Jugador = require('../models/Sorteo');
 const Joi = require('@hapi/joi');
-const sorteo = require('../models/Sorteo');
+const Sorteo = require('../models/sorteo');
 
 
 const sorteoSchema = Joi.object({
@@ -9,8 +8,8 @@ const sorteoSchema = Joi.object({
     nombre: Joi.string().min(2).max(255).required(),
     costo: Joi.string().min(2).max(255).required(),
     descripcion: Joi.string().min(2).max(255).required(),
-    inicio: Joi.string().min(12).max(12).required(),
-    final: Joi.string().min(6).max(100).required().email()
+    inicio: Joi.string().min(10).max(10).required(),
+    final: Joi.string().min(10).max(10).required()
     
 })
 
