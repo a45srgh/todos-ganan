@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -21,7 +23,7 @@ const jugadorRoutes = require('./routes/jugador');
 const sorteoRoutes = require('./routes/sorteo');
 const verifyToken = require('./routes/validate-token');
 
-app.use('/api/user', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/jugador', jugadorRoutes);
 app.use('/api/sorteo', verifyToken, sorteoRoutes); //TODO AQUI VOY A MODIFICAR PARA HACERLO PRIVADO
 
