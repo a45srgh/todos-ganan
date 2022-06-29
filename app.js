@@ -18,9 +18,12 @@ mongoose.connect(uri,
 
 const authRoutes = require('./routes/auth');
 const jugadorRoutes = require('./routes/jugador');
+const sorteoRoutes = require('./routes/sorteo');
+const verifyToken = require('./routes/validate-token');
 
 app.use('/api/user', authRoutes);
 app.use('/api/jugador', jugadorRoutes);
+app.use('/api/sorteo', verifyToken, sorteoRoutes); //TODO AQUI VOY A MODIFICAR PARA HACERLO PRIVADO
 
 app.get('/', (req, res) => {
     res.json({
