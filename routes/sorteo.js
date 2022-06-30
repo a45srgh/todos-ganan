@@ -4,6 +4,7 @@ const Sorteo = require('../models/sorteo');
 
 
 const sorteoSchema = Joi.object({
+   
     nombre: Joi.string().min(2).max(255).required(),
     costo: Joi.number().min(1).max(1000000).required(),
     descripcion: Joi.string().min(2).max(255).required(),
@@ -41,15 +42,33 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+    
     const id = req.params.id;
     const body = req.body;
 
+    const { error } = sorteoSchema.validate(body)
+    
+    if (error) {
+        return res.status(400).json(
+            {error: error.details[0].message}
+        )
+    }    
     console.log(id)
     console.log('body', body)
 
+    const sorteo = {
+
+        nombre: body.nombre,
+        costo: body.costo,
+        descripcion: body.descripcion,
+        fechaInicio: body.inicio,
+        fechaFinal: body.final,
+
+    };
+
     try {
         const sorteoDB = await Sorteo.findByIdAndUpdate(
-            id, body, { useFindAndModify: false }
+            id, sorteo, { useFindAndModify: false }
         )
         console.log(sorteoDB)
         res.json({
