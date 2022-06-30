@@ -42,4 +42,29 @@ router.post('/', async (req, res) => {
     }       
 })
 
+router.put('/:id', async (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+
+    console.log(id)
+    console.log('body', body)
+
+    try {
+        const sorteoDB = await Sorteo.findByIdAndUpdate(
+            id, body, { useFindAndModify: false }
+        )
+        console.log(sorteoDB)
+        res.json({
+            estado: true,
+            mensaje: 'editado'
+        })
+    } catch (error) {
+        console.log(error)
+        res.json({
+            estado: false,
+            mensaje: 'Fallo modificacion'
+        })
+    }
+})
+
 module.exports = router;
