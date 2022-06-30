@@ -41,6 +41,31 @@ router.post('/', async (req, res) => {
     }       
 })
 
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log('id desde backend', id)
+    try {
+
+        const sorteoDB = await Sorteo.findByIdAndDelete({ _id: id });
+        console.log(sorteoDB)
+       
+            if (!sorteoDB) {
+            res.json({
+                estado: false,
+                mensaje: 'No se puede eliminar'
+            })
+        } else {
+            res.json({
+                estado: true,
+                mensaje: 'sorteo eliminado!'
+            })
+        }
+        
+    } catch (error) {
+        console.log(error)
+   }
+})
+        
 router.put('/:id', async (req, res) => {
     
     const id = req.params.id;
