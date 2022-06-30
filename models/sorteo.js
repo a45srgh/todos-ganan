@@ -8,7 +8,7 @@ const sorteoRoutes = mongoose.Schema({
         max: 255
     },
     costo: {
-        type: String,
+        type: Number,
         required: true,
         min: 2,
         max: 255
@@ -20,16 +20,12 @@ const sorteoRoutes = mongoose.Schema({
         max: 255
     },
     fechaInicio: {
-        type: String,
-        required: true,
-        min: 10,
-        max: 10
+        type: Date,
+        required: true
     },
     fechaFinal: {
-        type: String,
-        required: true,
-        min: 10,
-        max: 10
+        type: Date,
+        required: true
     }
         
 })
