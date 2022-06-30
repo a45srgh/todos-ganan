@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const sorteoRoutes = mongoose.Schema({
+const sorteoSchema = Schema({
     nombre: {
         type: String,
         required: true,
@@ -8,7 +9,7 @@ const sorteoRoutes = mongoose.Schema({
         max: 255
     },
     costo: {
-        type: String,
+        type: Number,
         required: true,
         min: 2,
         max: 255
@@ -20,18 +21,21 @@ const sorteoRoutes = mongoose.Schema({
         max: 255
     },
     fechaInicio: {
-        type: String,
-        required: true,
-        min: 10,
-        max: 10
+        type: Date,
+        required: true
     },
     fechaFinal: {
-        type: String,
-        required: true,
-        min: 10,
-        max: 10
-    }
-        
+        type: Date,
+        required: true
+    },
+    premios: [{
+        type: Schema.Types.ObjectId,
+        ref: "Premio"
+    }],
+    jugadores: [{
+        type: Schema.Types.ObjectId,
+        ref: "jugadore"
+    }]
 })
 
-module.exports = mongoose.model('Sorteo', sorteoRoutes); //modelo es como se va llamar la base en mongo
+module.exports = mongoose.model('Sorteo', sorteoSchema); //modelo es como se va llamar la base en mongo
