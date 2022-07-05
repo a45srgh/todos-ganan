@@ -22,7 +22,7 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-}
+})
 
 const premioSchema = Joi.object({
    
