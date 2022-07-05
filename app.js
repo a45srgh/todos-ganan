@@ -29,7 +29,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/jugador', jugadorRoutes);
 
 app.use('/api/sorteo', verifyToken, sorteoRoutes);//TODO AQUI SE VA A MODIFICAR PARA HACERLO PRIVADO
-app.use('/api/premio', premioRoutes); 
+app.use('/api/premio', verifyToken, premioRoutes); 
 
 app.get('/', (req, res) => {
     res.json({
