@@ -11,7 +11,7 @@ const premioSchema = mongoose.Schema({
         type: Number,
         required: true,
         min: 2,
-        max: 255
+        max: 1000000
     },
     caracteristicas: {
         type: String,

@@ -40,7 +40,6 @@ router.post('/', async (req, res) => {  //se crea un router basado en post el cu
         res.status(400).json({error})
     }       
 })
-
 router.delete('/:id', async (req, res) => { //aqui va a buscar el id que se crea la guardar cada schema
     const id = req.params.id;  
     console.log('id desde backend', id)
@@ -60,14 +59,12 @@ router.delete('/:id', async (req, res) => { //aqui va a buscar el id que se crea
                 mensaje: 'sorteo eliminado!'
             })
         }
-        
     } catch (error) { // si no coincide el id o no se encuentra el proceso se fractura o quiebra e imprime el error 400 
         console.log(error)
    }
 })
-        
+
 router.put('/:id', async (req, res) => { // router va usar el metodo put y va crear una en sorteo con el id
-    
     const id = req.params.id; // va a requerir los datos que se encuentren en el id especifico de la ruta sorteos
     const body = req.body; //la constante body va recuperar los datos del cuerpo del id antes señalado
 
