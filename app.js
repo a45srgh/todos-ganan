@@ -23,11 +23,13 @@ const jugadorRoutes = require('./routes/jugador');
 const sorteoRoutes = require('./routes/sorteo');
 const premioRoutes = require('./routes/premio');
 const verifyToken = require('./routes/validate-token');
+const premioRoutes = require('./routes/premio');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/jugador', jugadorRoutes);
-app.use('/api/premio', premioRoutes);
-app.use('/api/sorteo', verifyToken, sorteoRoutes); //TODO AQUI VOY A MODIFICAR PARA HACERLO PRIVADO
+
+app.use('/api/sorteo', verifyToken, sorteoRoutes);//TODO AQUI SE VA A MODIFICAR PARA HACERLO PRIVADO
+app.use('/api/premio', premioRoutes); 
 
 app.get('/', (req, res) => {
     res.json({
